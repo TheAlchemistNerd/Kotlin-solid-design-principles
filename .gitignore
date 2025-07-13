@@ -1,31 +1,28 @@
-### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-*.
-.idea/
+# Compiled output and build artifacts
+out/          # IntelliJ IDEA's default output directory
+build/        # Gradle's default build output directory
+.gradle/      # Gradle's cache and generated files
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+# IDE specific files
+.idea/         # IntelliJ IDEA project files (excluding shared run configurations)
+*.iml          # IntelliJ IDEA module files
+*.iws          # IntelliJ IDEA workspace files
+*.ipr          # IntelliJ IDEA project files (older format)
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# Kotlin specific temporary files
+*.kpt
+*.ksd
 
-### VS Code ###
-.vscode/
+# Gradle Wrapper JAR (optional: uncomment '!' if you want to commit the wrapper JAR)
+# The wrapper script itself (`gradlew`, `gradlew.bat`) should *always* be committed.
+gradle/wrapper/*.jar
+#!gradle/wrapper/gradle-wrapper.jar # Uncomment this line if you specifically want to track the JAR
 
-### Mac OS ###
-.DS_Store
+# Operating System specific files
+.DS_Store      # macOS folder metadata
+Thumbs.db      # Windows thumbnail cache
+ehthumbs.db    # Windows thumbnail cache (hidden)
+Desktop.ini    # Windows custom folder settings
+
+# Log files
+*.log
