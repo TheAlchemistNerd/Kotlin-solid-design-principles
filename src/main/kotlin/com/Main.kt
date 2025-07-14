@@ -1,4 +1,10 @@
-package com.isp
+package com
+
+import com.abstractclasses.CurrentAccountAbstract
+import com.abstractclasses.FixedDepositAccountAbstract
+import com.abstractclasses.SavingsAccountAbstract
+import com.isp.*
+
 
 fun processWithdrawal(account: Withdrawable, amount: Double) {
     try {
@@ -31,4 +37,21 @@ fun main() {
         println("Account balance: ${acc.viewBalance()}")
         acc.deposit(50.0) // All accounts can deposit
     }
+
+    println("\n--- Using Abstract Classes (Kotlin) ---")
+    val savingsAbs = SavingsAccountAbstract(1200.0)
+    val currentAbs = CurrentAccountAbstract(600.0)
+    val fixedDepositAbs = FixedDepositAccountAbstract(2500.0)
+
+    savingsAbs.deposit(50.0)
+    savingsAbs.withdraw(300.0)
+
+    currentAbs.deposit(20.0)
+    currentAbs.withdraw(700.0)
+
+    fixedDepositAbs.deposit(100.0)
+    println("Fixed Deposit (Abstract) balance: ${fixedDepositAbs.viewBalance()}")
+
+    // This would also be a compile-time error:
+    // processWithdrawal(fixedDepositAbs, 100.0)
 }

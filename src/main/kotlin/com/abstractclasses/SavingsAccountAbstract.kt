@@ -1,4 +1,5 @@
-class SavingsAccountAbstract (intialBalance: Double = 0.0) : WithdrawableAccount(initialBalance) {
+package com.abstractclasses
+class SavingsAccountAbstract (initialBalance: Double = 0.0) : WithdrawableAccount(initialBalance) {
     override fun withdraw(amount: Double) {
         require(amount > 0) { "Withdrawal amount must be positive." }
         if (amount <= balance) {
