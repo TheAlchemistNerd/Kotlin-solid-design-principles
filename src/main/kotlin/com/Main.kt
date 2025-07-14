@@ -3,6 +3,10 @@ package com
 import com.abstractclasses.CurrentAccountAbstract
 import com.abstractclasses.FixedDepositAccountAbstract
 import com.abstractclasses.SavingsAccountAbstract
+import com.composition.ComposableBankAccount
+import com.composition.NoWithdraw
+import com.composition.OverdraftWithdraw
+import com.composition.StandardWithdraw
 import com.isp.*
 
 
@@ -54,4 +58,32 @@ fun main() {
 
     // This would also be a compile-time error:
     // processWithdrawal(fixedDepositAbs, 100.0)
+
+    println("\n--- Using Composition (Kotlin) ---")
+    val savingsComposed = ComposableBankAccount(1500.0, StandardWithdraw())
+    val currentComposed = ComposableBankAccount(700.0, OverdraftWithdraw())
+    val fixedDepositComposed = ComposableBankAccount(3000.0, NoWithdraw())
+
+    savingsComposed.deposit(100.0)
+    savingsComposed.handleWithdrawal(400.0) // OK
+    try {
+        savingsComposed.handleWithdrawal(1500.0) // Insufficient funds
+    } catch (e: IllegalArgumentException) {
+        println("Error: ${e.message}")
+    }
+
+    currentComposed.deposit(50.0)
+    currentComposed.handleWithdrawal(900.0) // Overdraft allowed
+
+    fixedDepositComposed.deposit(200.0)
+    try {
+        fixedDepositComposed.handleWithdrawal(100.0) // Not allowed
+    } catch (e: UnsupportedOperationException) {
+        println("Error: ${e.message}")
+    }
+
+    // Runtime flexibility: Change behavior
+    println("\nChanging savings account withdrawal behavior:")
+    savingsComposed.setWithdrawBehaviour(OverdraftWithdraw())
+    savingsComposed.handleWithdrawal(2000.0) // Now allows overdraft
 }
